@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name d3OnAngularSeedApp.controller:AboutCtrl
+ * @name SFM.controller:AboutCtrl
  * @description
  * # AboutCtrl
- * Controller of the d3OnAngularSeedApp
+ * Controller of the SFM
  */
-angular.module('d3OnAngularSeedApp')
+angular.module('SFM')
   .controller('AboutCtrl', function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',

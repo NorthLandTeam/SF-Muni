@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc overview
- * @name d3OnAngularSeedApp
+ * @name SFM
  * @description
- * # d3OnAngularSeedApp
+ * # SFM
  *
  * Main module of the application.
  */
 angular
-  .module('d3OnAngularSeedApp', [
+  .module('SFM', [
     'ngResource',
     'ngRoute',
     'd3'

@@ -2,10 +2,10 @@
 
 /**
  * @ngdoc service
- * @name d3OnAngularSeedApp.d3Service
+ * @name d3.d3Service
  * @description
  * # d3Service
- * Factory in the d3OnAngularSeedApp.
+ * Factory in the d3.
  */
 angular.module('d3', [])
 .factory('d3Service', ['$document', '$q', '$rootScope', function($document, $q, $rootScope) {

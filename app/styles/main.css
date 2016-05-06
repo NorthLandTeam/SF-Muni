@@ -1,20 +1,170 @@
+@import url(http://fonts.googleapis.com/css?family=Montserrat|Open+Sans:400,300);
+
+/* Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  background-color: #c7dae7;
+
+}
+
 /* Space out content a bit */
 body {
   padding-top: 20px;
   padding-bottom: 20px;
 }
 
+/* Off screen menu */
+.menu {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+
+/* hiding the checkbox */
+#tm {
+    display: none;
+}
+
+.menu section {
+    position: relative;
+    transition: all 0.3s;
+}
+
+.menu section label {
+    color: #fff;
+    background: #32323c;
+    text-align: center;
+    border-radius: 50%;
+
+    display: block;
+    padding: 10px 0;
+    margin-top: 25px;
+    margin-left: 25px;
+    width: 36px;
+    height: 36px;
+    position: relative;
+
+    cursor: pointer;
+    text-transform: uppercase;
+
+    transition: all 0.3s;
+}
+
+.menu section label:hover {
+    background-color: rgba(20,20,24,.3);
+}
+
+.menu section label div {
+    width: 20px;
+    height: 2px;
+    background-color: #fff;
+    margin-top: 3px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: 0.4s;
+}
+
+.sidenav {
+    background: rgb(50,50,60);
+    width: 200px;
+    position: absolute;
+    top: 0;
+    left:0;
+    bottom: 0;
+    margin: 0;
+    padding-top: 100px;
+    opacity: 0;
+    transition: all 0.25s;
+}
+
+.sidenav li {
+    list-style-type: none ;
+    background-color: #32323c;
+}
+
+.sidenav li:hover {
+  background-color: rgba(20,20,24,.26);
+} 
+
+.sidenav i {
+    display: block;
+    width: 50px;
+    float: left;
+    
+    text-align: center;
+    font-size: 16px;
+    line-height: 48px;
+}
+
+.sidenav a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.sidenav b {
+    font: 12px/48px Montserrat;
+    display: block;
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all 0.4s;
+}
+
+/* Animation controls using checkbox hack*/
+/* Animate content area to the left */
+#tm:checked ~ section label {
+    border: 1px solid #fff;
+    transform: translateX(120px);
+}
+
+/* Animte links from right to left + fade in effect*/
+#tm:checked ~ .sidenav {
+    opacity: 1;
+}
+
+#tm:checked ~ .sidenav b {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+#tm:checked ~ section label .bar1 {
+    transform: rotate(-45deg) translate(-3px, 3px);
+}
+
+#tm:checked ~ section label .bar2 {
+    opacity: 0;
+}
+
+#tm:checked ~ section label .bar3 {
+    transform: rotate(45deg) translate(-4px, -4px);
+}
+
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
-.marketing,
 .footer {
   padding-left: 15px;
   padding-right: 15px;
 }
 
 /* Custom page header */
+/* Customize container */
+.container {
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+}
+
 .header {
+  text-align: center;
   border-bottom: 1px solid #e5e5e5;
+  order: 0;
 }
 /* Make the masthead heading the same height as the navigation */
 .header h3 {
@@ -24,17 +174,27 @@ body {
   padding-bottom: 19px;
 }
 
+.jumbotron {
+  min-height: 500px;
+  order: 1;
+  flex-grow: 3;
+}
+
 /* Custom page footer */
 .footer {
+  text-align: center;
   padding-top: 19px;
   color: #777;
   border-top: 1px solid #e5e5e5;
+
+  order: 2;
 }
 
 /* Customize container */
 @media (min-width: 768px) {
   .container {
-    max-width: 730px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 .container-narrow > hr {
@@ -51,48 +211,112 @@ body {
   padding: 14px 24px;
 }
 
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
-}
-.marketing p + h4 {
-  margin-top: 28px;
-}
-
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   /* Remove the padding we set earlier */
   .header,
-  .marketing,
   .footer {
     padding-left: 0;
     padding-right: 0;
   }
+
   /* Space out the masthead */
   .header {
     margin-bottom: 30px;
   }
+
   /* Remove the bottom border on the jumbotron for visual effect */
   .jumbotron {
     border-bottom: 0;
   }
 }
 
-/* D3 */
-
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
+/* Map */
+.map-container {
+  height: 100%;
 }
 
-.x.axis path {
-  display: none;
+.streets, .freeways, .arteries, .neighborhoods {
+    fill: none;
+    stroke-linejoin: round;
 }
 
-.line {
-  fill: none;
-  stroke: steelblue;
-  stroke-width: 1.5px;
+.streets.streets {
+    stroke: #89c9ff;
+    stroke-width: 1px;
+}
+
+.freeways.streets {
+    stroke: #89c9ff;
+    stroke-width: 1px;
+}
+
+.arteries.streets {
+    stroke: #89c9ff;
+    stroke-width: 1px;
+}
+
+.neighborhoods.streets {
+    stroke: #89c9ff;
+    stroke-width: 1px;
+}
+
+.streets.freeways {
+    stroke: #2883d0;
+    stroke-width: 4px;
+}
+
+.freeways.freeways {
+    stroke: #2883d0;
+    stroke-width: 4px;
+}
+
+.arteries.freeways {
+    stroke: #2883d0;
+    stroke-width: 4px;
+}
+
+.neighborhoods.freeways {
+    stroke: #2883d0;
+    stroke-width: 4px;
+}
+
+.streets.arteries {
+    stroke: #38658b;
+    stroke-width: 2px;
+}
+
+.freeways.arteries {
+    stroke: #38658b;
+    stroke-width: 2px;
+}
+
+.arteries.arteries {
+    stroke: #38658b;
+    stroke-width: 2px;
+}
+
+.neighborhoods.arteries {
+    stroke: #38658b;
+    stroke-width: 2px;
+}
+
+.streets.neighborhoods {
+    stroke: rgba(40,131,208,0.4);
+    stroke-width: 2px;
+}
+
+.freeways.neighborhoods {
+    stroke: rgba(40,131,208,0.4);
+    stroke-width: 2px;
+}
+
+.arteries.neighborhoods {
+    stroke: rgba(40,131,208,0.4);
+    stroke-width: 2px;
+}
+
+.neighborhoods.neighborhoods {
+    stroke: rgba(40,131,208,0.4);
+    stroke-width: 2px;
 }
