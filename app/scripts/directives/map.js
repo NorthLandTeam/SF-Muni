@@ -7,7 +7,7 @@
  * # map
  */
 angular.module('SFM')
-	.directive('map', ['d3Service', 'muniService', 'mapService', 'routeService', function(d3Service, muniService, mapService, routeService) {
+	.directive('map', ['d3Service', 'muniService', 'mapService', 'routeService', 'busService', function(d3Service, muniService, mapService, routeService, busService) {
     	return {
 			restrict: 'EA',
 			link: function(scope, element, attrs) {
@@ -21,18 +21,14 @@ angular.module('SFM')
     				var drawMap = DrawMap.drawMap,
     					redraw = DrawMap.redraw;
 
-					var zoom = d3.behavior.zoom()
-								 .scaleExtent([-1, 2]);
-
-					var projection = mapService.projection;
-
-					//Define path generator
-					var path = mapService.getPathWithProjection(projection);
-
-					var svg = mapService.getSvg(zoom, redraw);
+					var zoom = mapService.zoom,
+						projection = mapService.projection,
+						path = mapService.getPathWithProjection(projection),
+						svg = mapService.getSvg()
+									.call(zoom.on("zoom", redraw));
 
 					d3.json('../maps/streets.json', function(error, json) {
-						DrawMap.drawMap(svg, json, 'streets', path);
+						drawMap(svg, json, 'streets', path);
 
 						d3.json('../maps/arteries.json', function(error, json) {
 							drawMap(svg, json, 'arteries', path);
@@ -43,17 +39,43 @@ angular.module('SFM')
 								d3.json('../maps/neighborhoods.json', function(error, json) {
 									drawMap(svg, json, 'neighborhoods', path);
 
-									scope.$watch('routes', function() {
-										var routes = scope.routes;
-										$.each(routes, function(key, value) {
-											routeService.renderRoute(svg, projection, value);
-										});
-									})
+									muniService.fetchRouteData().then(function(data) {
+										scope.routes = data.route;
+										renderRoutes(svg, scope.routes);
+										fetchBusData(svg, scope.buses, scope.routes);
+									});
 								});
 							});
 						});
 					});
 				});
+
+				function fetchBusData(svg, store, routes) {
+					$.each(routes, function(key, value) {
+						var tag = value.$.tag;
+
+						muniService.fetchBusData(tag).then(function(data) {
+							var vehicles = data.vehicle;
+							$.each(vehicles, function(key, value) {
+								//console.log(value.$);
+								store.push(value.$);
+							});
+							renderBuses(svg, scope.buses);
+						});
+					});
+				}
+
+				function renderRoutes(svg, routes) {
+					$.each(routes, function(key, value) {
+						routeService.renderRoute(svg, value);
+					});
+				}
+
+				function renderBuses(svg, buses) {
+					$.each(buses, function(key, value) {
+						busService.renderBuses(svg, value);
+					});
+				}
 			}
 		};
 }]);

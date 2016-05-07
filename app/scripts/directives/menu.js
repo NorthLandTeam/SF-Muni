@@ -17,10 +17,11 @@ angular.module('SFM')
 	      //controllerAs: 'routeCtr',
     	  templateUrl: '/views/menu.html',
         link: function(scope, element, attrs) {
+          //todo 
           $('.sidenav li').hover(function() {
 
           }, function() {
-
+            
           });
 
           $('.sidenav').on('click', 'li', function() {
@@ -29,16 +30,13 @@ angular.module('SFM')
 
               if(hasClass) {
                 $(this).removeClass('selected');
-                $('.route[data-tag="' + routeTag + '"]').removeClass('selected');
                 Interaction.deSelectRoute(routeTag);
               } else {
-                // TODO 
-                // selected route(s):
+                // TODO: selected route(s):
                 // add class selected to li (checked)
-                // hide unselected routes on map
+                // hide unselected routes on map (checked)
                 // hide buses of unselected routes on map
                 $(this).addClass('selected');
-                $('.route[data-tag="' + routeTag + '"]').addClass('selected');
                 Interaction.selectRoute(routeTag);
               }
           });

@@ -176,6 +176,10 @@ body {
   flex-grow: 3;
 }
 
+.route {
+  cursor: pointer;
+}
+
 /* Custom page footer */
 .footer {
   text-align: center;

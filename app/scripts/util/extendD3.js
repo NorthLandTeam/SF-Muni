@@ -1,35 +1,5 @@
 'use strict';
 
-/* Map visibility */
-d3.selection.prototype.hide = function() {
-	return this.style("visibility", "hidden");
-};
-
-d3.selection.prototype.show = function() {
-	return this.style("visibility", "visible");
-};
-
-d3.selection.prototype.hideMap = function() {
-	return this.style("stroke-opacity", 0.3);
-};
-
-d3.selection.prototype.showMap = function() {
-	return this.style("stroke-opacity", 0.8);
-};
-
-/* Routes display */
-d3.selection.prototype.routeShow = function() {
-	return this.style("stroke-opacity", 1).attr("stroke-width", 3);
-};
-
-d3.selection.prototype.routeHide = function() {
-	return this.style("stroke-opacity", 0.05).attr("stroke-width", 2);
-};
-
-d3.selection.prototype.routeNormal = function() {
-	return this.style("stroke-opacity", 0.3).attr("stroke-width", 2);
-};
-
 /* Buses */
 d3.selection.prototype.drawVehicle = function( json ) {
 	var draw = this

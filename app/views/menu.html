@@ -6,12 +6,14 @@
     <ul class="sidenav">
         <li 
             data-tag={{route.$.tag}}
+            data-toggle="tooltip"
+            title={{route.$.title}}
             ng-repeat="route in routes | orderBy: '-$.title': true">
             <div class='routeContainer'>
                 <a 
                     class='routeName'
                     ng-style="{color:makeHexColor(route.$.color)}">
-                    {{route.$.title}}
+                    {{route.$.tag}}
                 </a>
             </div>
         </li>
