@@ -7,10 +7,16 @@
  * # map
  */
 angular.module('SFM')
-	.directive('map', ['d3Service', function(d3Service) {
+	.directive('map', ['d3Service', 'mapService', 'routeService', function(d3Service, mapService, routeService) {
+		function controller(routeService, $scope) {
+			$scope.routes = JSON.parse(localStorage.getItem('routes'));
+		}
+
     	return {
 			restrict: 'EA',
 			scope: {},
+			controller: controller,
+			controllerAs: 'mapCtr',
 			link: function(scope, element, attrs) {
 				var height = element[0].parentNode.offsetHeight;
 				element[0].style.height = height - 100 + 'px';
@@ -20,20 +26,16 @@ angular.module('SFM')
     					height = element[0].style.height;
 
 					var zoom = d3.behavior.zoom()
-								 .scaleExtent([-.15, 7]);
+								 .scaleExtent([-1, 2]);
 
-					var projection = d3.geo.mercator()
-											.scale(200000)
-											.center([-122.45, 37.75]);
+					var projection = mapService.projection;
+
+					console.log(projection);
 
 					//Define path generator
-					var path = d3.geo.path()
-					    		 .projection(projection);
+					var path = mapService.getPathWithProjection(projection);
 
-					var svg = d3.select('.map-container').append('svg')
-								.attr('width', '100%')
-								.attr('height', '100%')
-								.call(zoom.on('zoom', redraw));
+					var svg = mapService.getSvg(zoom, redraw);
 
 					d3.json('../maps/streets.json', function(error, json) {
 						drawMap(svg, json, 'streets', path);
@@ -47,7 +49,11 @@ angular.module('SFM')
 								d3.json('../maps/neighborhoods.json', function(error, json) {
 									drawMap(svg, json, 'neighborhoods', path);
 
-									//mapsLoaded();
+									var routes = scope.routes;
+									console.log(routes);
+									$.each(routes, function(key, value) {
+										routeService.renderRoute(svg, projection, value);
+									});
 								});
 							});
 						});

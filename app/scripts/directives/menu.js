@@ -8,11 +8,11 @@
  */
 
 angular.module('SFM')
-  	.directive('menu', ['$rootScope', 'muniService', function($rootScope, muniService) {
+  	.directive('menu', ['muniService', function(muniService) {
   		var controller = function($scope) {
-  			if(!$rootScope.routes || !$scope.routes) {
+  			if(!localStorage.getItem('routes') || !$scope.routes) {
   				muniService.fetchRouteData(false).then(function(routes) {
-  					$rootScope.routes = routes;
+  					localStorage.setItem('routes', JSON.stringify(routes));
   					$scope.routes = routes;
   					console.log(routes);
   				});
