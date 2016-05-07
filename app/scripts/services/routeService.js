@@ -21,31 +21,11 @@ angular.module('SFM')
 						.attr("class", "route" )
 						.attr("data-tag", routeData.$.tag )
 						.attr("stroke", '#' + routeData.$.color )
-						.attr("stroke-width", 2)
-						.style("stroke-opacity", 0.3)
+						.attr("stroke-width", 4)
+						.style("stroke-opacity", 0.5)
 						.attr("fill", "none");
 
-					svg.append("path")
-						.attr("d", routeLineFunction(path.point) )
-						.attr("data-tag", routeData.$.tag )
-						.attr("stroke", 'transparent' )
-						.attr("stroke-width", 10)
-						.attr("fill", "none")
-						.each( function(){
-							$(this).tooltip({
-								'title': routeData.$.title,
-								'space': 40
-							});
-						})
-						/*
-						.on('mouseenter', function(){
-							route.select(routeData.$.tag)
-						})
-						.on('mouseleave', route.deselect );
-						*/
-						console.log(svg);
 						return svg;
-
 		});
 	}
 

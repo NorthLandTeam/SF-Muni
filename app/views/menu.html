@@ -1,11 +1,18 @@
 <div class="menu">
     <!-- Checkbox to toggle the menu -->
     <input type="checkbox" id="tm" />
+    
     <!-- Menu -->
     <ul class="sidenav">
-        <li ng-repeat="route in routes | orderBy: '-$.title': true">
+        <li 
+            data-tag={{route.$.tag}}
+            ng-repeat="route in routes | orderBy: '-$.title': true">
             <div class='routeContainer'>
-                <a class='routeName' ng-style="{color:makeHexColor(route.$.color)}">{{route.$.title}}</a>
+                <a 
+                    class='routeName'
+                    ng-style="{color:makeHexColor(route.$.color)}">
+                    {{route.$.title}}
+                </a>
             </div>
         </li>
     </ul>

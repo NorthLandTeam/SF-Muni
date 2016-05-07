@@ -14,10 +14,22 @@ function routeConfigUrl(routeTag) {
 		command: 'routeConfig',
 		a: agency
 	};
+
 	if(routeTag) {
 		routeConfigData.r = routeTag;
 	}
+
 	return formatUrl(routeConfigData);
 }
 
 /* Bus */
+function busConfigUrl(routeTag) {
+	var busConfigData = {
+		command: 'vehicleLocations',
+		a: agency,
+		r: routeTag,
+		t: 150000
+	};
+	
+	return formatUrl(busConfigData);
+}

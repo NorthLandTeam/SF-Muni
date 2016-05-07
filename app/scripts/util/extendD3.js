@@ -10,21 +10,11 @@ d3.selection.prototype.show = function() {
 };
 
 d3.selection.prototype.hideMap = function() {
-	return this.style("stroke-opacity", 0.5);
+	return this.style("stroke-opacity", 0.3);
 };
 
 d3.selection.prototype.showMap = function() {
-	return this.style("stroke-opacity", 0.7);
-};
-
-/* Map rendering */
-d3.selection.prototype.drawMap = function(json, className) {
-	return this
-		.append("path")
-		.datum(json)
-		.attr("class", 'map ' + className)
-		.style("fill", "none")
-		.attr("d", path);
+	return this.style("stroke-opacity", 0.8);
 };
 
 /* Routes display */

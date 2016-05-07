@@ -9,16 +9,13 @@
  */
 angular.module('SFM')
 .factory('muniService', ['$http', '$q', function($http, $q) {
-	var routeConfigStore = [];
-
-	function fetchData(url, processedData) {
+	function fetchData(url) {
 		var deferred = $q.defer();
-		var requestTimes = 0;
 
 		$http.get(url)
 			 .success(function(data) {
 			 	var json = $.xml2json(data);
-			 	deferred.resolve(json.body.route);
+			 	deferred.resolve(json.body);
 			 })
 			 .error(function(error) {
 			 	deferred.reject(error);
@@ -31,9 +28,10 @@ angular.module('SFM')
 		return fetchData(routeConfigUrl(routeTag));
 	}
 
-	function fetchBusData() {
-		return;
+	function fetchBusData(routeTag) {
+		return fetchData(busConfigUrl(routeTag));
 	}
+
 	return {
 		fetchRouteData: fetchRouteData,
 		fetchBusData: fetchBusData

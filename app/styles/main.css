@@ -100,6 +100,10 @@ body {
     cursor: pointer;
 }
 
+.sidenav li.selected {
+  background-color: rgba(119, 119, 119,.26);
+}
+
 .sidenav li:hover {
   background-color: rgba(119, 119, 119,.26);
 } 

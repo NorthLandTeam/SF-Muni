@@ -9,27 +9,39 @@
 
 angular.module('SFM')
   	.directive('menu', ['muniService', function(muniService) {
-  		var controller = function($scope) {
-  			if(!localStorage.getItem('routes') || !$scope.routes) {
-  				muniService.fetchRouteData(false).then(function(routes) {
-  					localStorage.setItem('routes', JSON.stringify(routes));
-  					$scope.routes = routes;
-  					console.log(routes);
-  				});
-  			}
-
-  			$scope.makeHexColor = function(hex) {
-  				return ('#' + hex);
-  			};
-  		};
-
     	return {
 	      restrict: 'EA',
 	      // isolate scope from parents's
-	      scope: {},
 	      replace: true,
-	      controller: controller,
-	      controllerAs: 'routeCtr',
-    	  templateUrl: '/views/menu.html'
+	      //controller: controller,
+	      //controllerAs: 'routeCtr',
+    	  templateUrl: '/views/menu.html',
+        link: function(scope, element, attrs) {
+          $('.sidenav li').hover(function() {
+
+          }, function() {
+
+          });
+
+          $('.sidenav').on('click', 'li', function() {
+              var hasClass = $(this).hasClass('selected');
+              var routeTag = $(this).data('tag');
+
+              if(hasClass) {
+                $(this).removeClass('selected');
+                $('.route[data-tag="' + routeTag + '"]').removeClass('selected');
+                Interaction.deSelectRoute(routeTag);
+              } else {
+                // TODO 
+                // selected route(s):
+                // add class selected to li (checked)
+                // hide unselected routes on map
+                // hide buses of unselected routes on map
+                $(this).addClass('selected');
+                $('.route[data-tag="' + routeTag + '"]').addClass('selected');
+                Interaction.selectRoute(routeTag);
+              }
+          });
+        }
 	  	};
 }]);

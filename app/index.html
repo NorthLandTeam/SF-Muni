@@ -25,8 +25,10 @@
       <div class="header">
         <h3 class="text-muted">SF-Muni</h3>
       </div>
-
-      <div menu></div>
+      <div ng-controller="MainCtrl as Main">
+          <div 
+            menu></div>
+      </div>  
 
       <div ng-view=""></div>
 
@@ -55,16 +57,18 @@
     <script src='scripts/util/extendD3.js'></script>
     <script src="scripts/util/drawMap.js"></script>
     <script src="scripts/util/webServiceHelpers.js"></script>
-
-    <!-- controllers -->
-    <script src="scripts/controllers/main.js"></script>
-    <script src="scripts/controllers/about.js"></script>
+    <script src="scripts/util/interactions.js"></script>
 
     <!-- services -->
     <script src="scripts/services/d3service.js"></script>
     <script src="scripts/services/muniService.js"></script>
     <script src="scripts/services/mapService.js"></script>
     <script src="scripts/services/routeService.js"></script>
+
+    <!-- controllers -->
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/about.js"></script>
+
 
     <!-- directives -->
     <script src="scripts/directives/menu.js"></script>
