@@ -3,8 +3,11 @@
     <input type="checkbox" id="tm" />
     <!-- Menu -->
     <ul class="sidenav">
-        <li><a ng-href="#"><i class="fa fa-home"></i><b>Home</b></a></li>
-        <li><a ng-href="#/about"><i class="fa fa-inbox"></i><b>About</b></a></li>
+        <li ng-repeat="route in routes | orderBy: '-$.title': true">
+            <div class='routeContainer'>
+                <a class='routeName' ng-style="{color:makeHexColor(route.$.color)}">{{route.$.title}}</a>
+            </div>
+        </li>
     </ul>
     
     <!-- Content area -->

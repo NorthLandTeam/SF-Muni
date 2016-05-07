@@ -8,10 +8,28 @@
  */
 
 angular.module('SFM')
-  	.directive('menu', function() {
+  	.directive('menu', ['$rootScope', 'muniService', function($rootScope, muniService) {
+  		var controller = function($scope) {
+  			if(!$rootScope.routes || !$scope.routes) {
+  				muniService.fetchRouteData(false).then(function(routes) {
+  					$rootScope.routes = routes;
+  					$scope.routes = routes;
+  					console.log(routes);
+  				});
+  			}
+
+  			$scope.makeHexColor = function(hex) {
+  				return ('#' + hex);
+  			};
+  		};
+
     	return {
 	      restrict: 'EA',
+	      // isolate scope from parents's
+	      scope: {},
 	      replace: true,
+	      controller: controller,
+	      controllerAs: 'routeCtr',
     	  templateUrl: '/views/menu.html'
 	  	};
-});
+}]);

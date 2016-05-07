@@ -14,6 +14,7 @@ angular.module('SFM')
 			link: function(scope, element, attrs) {
 				var height = element[0].parentNode.offsetHeight;
 				element[0].style.height = height - 100 + 'px';
+
 				d3Service.d3().then(function(d3) {
 					var width = element[0].style.width,
     					height = element[0].style.height;
@@ -23,7 +24,7 @@ angular.module('SFM')
 
 					var projection = d3.geo.mercator()
 											.scale(200000)
-											.center([-122.38, 37.75]);
+											.center([-122.45, 37.75]);
 
 					//Define path generator
 					var path = d3.geo.path()
@@ -52,5 +53,6 @@ angular.module('SFM')
 						});
 					});
 				});
-	}};
+			}
+		};
 }]);

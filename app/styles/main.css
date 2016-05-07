@@ -72,7 +72,7 @@ body {
 }
 
 .sidenav {
-    background: rgb(50,50,60);
+    background: #ffffff;
     width: 200px;
     position: absolute;
     top: 0;
@@ -82,38 +82,30 @@ body {
     padding-top: 100px;
     opacity: 0;
     transition: all 0.25s;
+    overflow: scroll;
+}
+
+/* remove scrollbar */
+.sidenav::-webkit-scrollbar { 
+    display: none; 
 }
 
 .sidenav li {
+    font-size: 1.5em;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 10px;
     list-style-type: none ;
-    background-color: #32323c;
+    background-color: #ffffff;
+    cursor: pointer;
 }
 
 .sidenav li:hover {
-  background-color: rgba(20,20,24,.26);
+  background-color: rgba(119, 119, 119,.26);
 } 
 
-.sidenav i {
-    display: block;
-    width: 50px;
-    float: left;
-    
-    text-align: center;
-    font-size: 16px;
-    line-height: 48px;
-}
-
 .sidenav a {
-    color: #fff;
     text-decoration: none;
-}
-
-.sidenav b {
-    font: 12px/48px Montserrat;
-    display: block;
-    opacity: 0;
-    transform: translateX(50px);
-    transition: all 0.4s;
 }
 
 /* Animation controls using checkbox hack*/
