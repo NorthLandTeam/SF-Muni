@@ -27,9 +27,13 @@ angular.module('SFM')
 						.attr("stroke", '#' + routeData.$.color)
 						.attr("stroke-width", 4)
 						.style("stroke-opacity", 0.5)
-						.attr("fill", "none");
+						.attr("fill", "none")
+						.append("svg:title")
+          				.text(function(d) { 
+          					return routeData.$.title;
+          				});
 
-						return svg;
+					return svg;
 		});
 	}
 

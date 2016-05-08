@@ -92,7 +92,8 @@ body {
 
 .sidenav li {
     font-size: 1.5em;
-    list-style-type: none ;
+    list-style-type: none;
+    margin-bottom: 5px;
     background-color: #ffffff;
     cursor: pointer;
 }
@@ -367,7 +368,6 @@ body {
 
 #loader p {
   text-align: center;
-  font-family: 'Hanna', serif;
   font-weight: 50;
   color:rgba(192,41,66,1);
   animation: pulse 2s ease-in-out infinite;
@@ -488,3 +488,6 @@ body {
     stroke: rgba(40,131,208,0.4);
     stroke-width: 2px;
 }
+
+/* Tooltips */
+/* Routes*/

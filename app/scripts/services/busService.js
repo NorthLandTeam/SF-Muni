@@ -18,21 +18,6 @@ angular.module('SFM')
 
 		function renderBuses(svg, busData) {
 			/*
-			if(!busData) {
-				return;
-			} 
-			var busTag = '.' + className;
-			var routeTag = busData.routeTag;
-			var lon = parseFloat(busData.lon);
-			var lat = parseFloat(busData.lat);
-			//console.log(busData);
-
-			if(routeTag) {
-				busTag += '[data-route-tag="' + routeTag + '"]';
-			}
-			*/
-
-			/*
 				TODO: IMPROVE ARROW DIRECTION WITH
 				ANGLE: d.$.heading
 			 */

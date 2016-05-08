@@ -20,7 +20,7 @@ d3.selection.prototype.drawVehicle = function(busData, projection) {
 
 
 	buses.attr('class', 'bus')
-		.attr('data-route-tag', function (d) { 
+		.attr('data-route-tag', function (d) {
 			return d.$.routeTag; 
 		})
 		.attr('data-dir-tag', function (d) { 
@@ -37,14 +37,10 @@ d3.selection.prototype.drawVehicle = function(busData, projection) {
 				+ projection([d.$.lon,d.$.lat])[0] + "," 
 				+ projection([d.$.lon,d.$.lat])[1] + ") scale(.75)";
 		})
-		/*
-		.attr("cx", function (d) { 
-			return projection([d.$.lon,d.$.lat])[0]; 
-		})
-		.attr("cy", function (d) { 
-			return projection([d.$.lon,d.$.lat])[1]; 
-		})
-		*/
+		.append("svg:title")
+		.text(function(d) { 
+			return d.$.id + ' to ' + d.$.dirTag;
+		});
 
 	return buses;
 };
