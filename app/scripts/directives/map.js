@@ -55,7 +55,7 @@ angular.module('SFM')
 				});
 				$interval(function(){ 
 					fetchBusData(svg, scope.buses, scope.routes, projection) 
-				},15000);
+				},1500000);
 
 				function fetchBusData(svg, store, routes, projection) {
 					console.log('executed');
@@ -66,10 +66,11 @@ angular.module('SFM')
 						muniService.fetchBusData(tag).then(function(data) {
 							var vehicles = data.vehicle;
 							$.each(vehicles, function(key, value) {
-								store.push(value);
-								
+								//filter out empty data
+								if(value.$) {
+									store.push(value);
+								}
 							});
-							//console.log(d3.selection.prototype.drawVehicle);
 							svg.selectAll('.bus').drawVehicle(store, projection);
 						});
 					});

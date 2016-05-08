@@ -40,6 +40,12 @@ angular.module('SFM')
                 Interaction.selectRoute(routeTag);
               }
           });
+
+          //some animation
+          $('#tm').on('click', function() {
+            $('.jumbotron').toggleClass('focusOnPage');
+          });
+
         }
 	  	};
 }]);
