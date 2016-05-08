@@ -181,9 +181,15 @@ body {
   z-index: 100;
 }
 
-.route {
+.route, .bus {
   cursor: pointer;
 }
+
+.bus:hover {
+  fill-opacity: 1;
+  fill: #8d3155;
+}
+
 
 /* Custom page footer */
 .footer {
