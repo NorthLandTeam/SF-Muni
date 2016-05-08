@@ -10,6 +10,8 @@
             title={{route.$.title}}
             ng-repeat="route in routes | orderBy: '-$.title': true">
             <div class='routeContainer'>
+                <i class="fa fa-bus" 
+                   ng-style="{color:makeHexColor(route.$.color)}"></i>
                 <a 
                     class='routeName'
                     ng-style="{color:makeHexColor(route.$.color)}">
