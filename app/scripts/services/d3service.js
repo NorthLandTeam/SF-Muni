@@ -13,6 +13,7 @@ angular.module('d3', [])
     function onScriptLoad() {
       // Load client in the browser
       $rootScope.$apply(function() {
+        console.log(window.d3.selection.prototype);
         d.resolve(window.d3); 
       });
     }

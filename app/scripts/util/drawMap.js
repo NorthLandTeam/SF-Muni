@@ -16,5 +16,3 @@ var DrawMap = {
 		d3.selectAll('path, circle').attr('transform', 'translate(' + trans + ')' + ' scale(' + scale + ')');
 	}
 }
-
-/* Routes */
