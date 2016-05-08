@@ -28,7 +28,7 @@ function busConfigUrl(routeTag) {
 		command: 'vehicleLocations',
 		a: agency,
 		r: routeTag,
-		t: 150000
+		t: new Date().valueOf() - 900000
 	};
 	
 	return formatUrl(busConfigData);

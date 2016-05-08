@@ -22,6 +22,9 @@ angular.module('SFM')
 			} 
 			var busTag = '.' + className;
 			var routeTag = busData.routeTag;
+			var lon = parseFloat(busData.lon);
+			var lat = parseFloat(busData.lat);
+			//console.log(busData);
 
 			if(routeTag) {
 				busTag += '[data-route-tag="' + routeTag + '"]';
@@ -32,7 +35,7 @@ angular.module('SFM')
 				ANGLE: d.$.heading
 			 */
 			svg.append('circle')
-					.attr('r', 4)
+					.attr('r', 6)
 					.attr('fill', 'black')
 					.attr("class", className)
 					.attr("data-route-tag", routeTag)
@@ -40,8 +43,8 @@ angular.module('SFM')
 					.attr("data-heading", busData.heading)
 					.attr("data-id", busData.id)
 					.transition()
-					.attr("cx", function (d) { return projection([busData.lon,busData.lat])[0]; })
-					.attr("cy", function (d) { return projection([busData.lon,busData.lat])[1]; });
+					.attr("cx", function (d) { return projection([lon,lat])[0]; })
+					.attr("cy", function (d) { return projection([lon,lat])[1]; });
 		}
 
 		return {

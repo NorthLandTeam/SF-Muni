@@ -7,7 +7,7 @@
  * # map
  */
 angular.module('SFM')
-	.directive('map', ['d3Service', 'muniService', 'mapService', 'routeService', 'busService', function(d3Service, muniService, mapService, routeService, busService) {
+	.directive('map', ['$interval', 'd3Service', 'muniService', 'mapService', 'routeService', 'busService', function($interval, d3Service, muniService, mapService, routeService, busService) {
     	return {
 			restrict: 'EA',
 			link: function(scope, element, attrs) {
@@ -21,7 +21,8 @@ angular.module('SFM')
     				var drawMap = DrawMap.drawMap,
     					redraw = DrawMap.redraw;
 
-					var zoom = mapService.zoom,
+					var zoom = d3.behavior.zoom()
+								 .scaleExtent([-1, 2]),
 						projection = mapService.projection,
 						path = mapService.getPathWithProjection(projection),
 						svg = mapService.getSvg()
@@ -45,22 +46,29 @@ angular.module('SFM')
 										fetchBusData(svg, scope.buses, scope.routes);
 									});
 								});
+
 							});
 						});
 					});
+					$interval(function(){ 
+						fetchBusData(svg, scope.buses, scope.routes) 
+					},15000);
 				});
 
 				function fetchBusData(svg, store, routes) {
+					console.log('executed');
+					store = [];
 					$.each(routes, function(key, value) {
 						var tag = value.$.tag;
 
 						muniService.fetchBusData(tag).then(function(data) {
 							var vehicles = data.vehicle;
 							$.each(vehicles, function(key, value) {
-								//console.log(value.$);
+								//console.log(value);
 								store.push(value.$);
+								
 							});
-							renderBuses(svg, scope.buses);
+							renderBuses(svg, store);
 						});
 					});
 				}
