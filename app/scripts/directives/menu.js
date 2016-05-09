@@ -18,12 +18,16 @@ angular.module('SFM')
   	      //controllerAs: 'routeCtr',
       	  templateUrl: '/views/menu.html',
           link: function(scope, element, attrs) {
-            //todo 
-            $('.sidenav li').hover(function() {
-
-            }, function() {
-              
-            });
+            $('.sidenav').on({
+                mouseenter: function() {
+                              var routeTag = $(this).data('tag');
+                              interactionService.selectRoute(routeTag);
+                            }, 
+                mouseleave: function() {
+                            var routeTag = $(this).data('tag');
+                            interactionService.deSelectRoute(routeTag);
+                          }
+            }, 'li');
 
             $('.sidenav').on('click', 'li', function() {
                 var hasClass = $(this).hasClass('selected');

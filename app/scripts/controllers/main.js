@@ -13,9 +13,6 @@ angular.module('SFM')
 	$scope.buses = [];
 	muniService.fetchRouteData().then(function(data) {
 		$scope.routes = data.route;
-
-		//initialize tooltip
-		$('[data-toggle="tooltip"]').tooltip(); 
 	});
 
 	$scope.makeHexColor = function(hex) {

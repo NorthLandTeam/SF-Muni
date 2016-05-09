@@ -13,7 +13,6 @@ angular.module('SFM')
 
 			function selectRoute(routeTag) {
 				var route = '.route[data-tag="' + routeTag + '"]';
-				var buses = '.bus' + '[data-route-tag="' + routeTag + '"]';
 				selectedRoutes.push(route);
 
 				d3.selectAll('.map').style("stroke-opacity", 0.3);
@@ -23,7 +22,12 @@ angular.module('SFM')
 					d3.selectAll(route).style("stroke-opacity", 1).attr("stroke-width", 5);
 				})
 				d3.selectAll('.bus').style("opacity", 0.25);
-				d3.selectAll(buses).style("opacity", 1);
+				$.each(selectedRoutes, function(key, value) {
+					var routeTag = value.substring(6,12) + 'route-' + value.substring(12);
+					console.log(routeTag);
+					var buses = '.bus' + routeTag;
+					d3.selectAll(buses).style("opacity", 1);
+				});
 			}
 
 			function deSelectRoute(routeTag) {

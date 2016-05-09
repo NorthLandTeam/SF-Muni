@@ -29,8 +29,6 @@ angular.module('SFM')
 			}
 
 			function redraw() {
-				console.log(d3.event.translate);
-				console.log(d3.event.scale);
 				var trans = d3.event.translate;
 				var scale = d3.event.scale;
 				d3.selectAll('.map, .route, .bus').attr('transform', 'translate(' + trans[0] + ',' + trans[1] + ')' + ' scale(' + scale + ')');
