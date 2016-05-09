@@ -57,8 +57,8 @@ angular.module('SFM')
 								 .scaleExtent([-1, 2]),
 						projection = mapService.projection,
 						path = mapService.getPathWithProjection(projection),
-						svg = mapService.getSvg()
-									.call(zoom.on("zoom", redraw));
+						svg = mapService.getSvg();
+									//.call(zoom.on("zoom", redraw));
 
 						d3.json('../maps/streets.json', function(error, json) {
 							drawMap(svg, json, 'streets', path);
@@ -84,7 +84,7 @@ angular.module('SFM')
 						});
 						$interval(function(){ 
 							fetchBusData(svg, scope.buses, scope.routes, projection) 
-						},1500000);
+						},15000);
 						}); 
 
 				}

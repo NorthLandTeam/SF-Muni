@@ -10,7 +10,7 @@
 angular.module('SFM')
 		.factory('mapService', function(){
 			var projection = d3.geo.mercator()
-								.scale(400000)
+								.scale(200000)
 								.center([-122.45, 37.75]);
 
 			function getPathWithProjection(projection) {

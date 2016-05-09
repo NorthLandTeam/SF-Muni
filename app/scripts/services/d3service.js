@@ -21,7 +21,7 @@ angular.module('d3', ['SFM'])
 				//use simple symbole circle instead
 				buses.enter()
 					.append('circle')
-					.attr('r', 10)
+					.attr('r', 5)
 					.attr('fill', '#31558d')
 					.attr('fill-opacity', '0.75');
 
@@ -69,7 +69,7 @@ angular.module('d3', ['SFM'])
       var scriptTag = $document[0].createElement('script');
       scriptTag.type = 'text/javascript'; 
       scriptTag.async = true;
-      scriptTag.src = 'bower_components/d3/d3.js';
+      scriptTag.src = 'https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.12/d3.js';
       scriptTag.onreadystatechange = function () {
         if (this.readyState == 'complete') onScriptLoad();
       }
