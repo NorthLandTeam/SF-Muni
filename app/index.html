@@ -22,6 +22,7 @@
   <body ng-app="SFM">
     <!-- Add your site or application content here -->
     <div class="container">
+
       <div id="loader-wrapper">
         <div id="loader">
           <p>LOADING</p>
@@ -35,7 +36,34 @@
       
       <div class="header">
         <h3 class="text-muted">SF-Muni</h3>
+
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">About</button>
+
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">SF Muni</h4>
+              </div>
+              <div class="modal-body" style="text-align: left;">
+                <p>Using d3.js and Angular.js to draw the real-time positions of San Francisco's buses and trains.</p>
+                <p>The map will update the info every 15 seconds. And display the locations of buses in the last 15min.</p>
+                <p>Users can hover the routes on map to get the name of those routes.</p>
+                <p>Users can choose the routes from the left side-navigation, and see the highlighted routes and their associated buses on the map.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
       </div>
+
       <div ng-controller="MainCtrl as Main">
           <div 
             menu></div>
@@ -86,7 +114,6 @@
     <script src="scripts/services/muniService.js"></script>
     <script src="scripts/services/mapService.js"></script>
     <script src="scripts/services/routeService.js"></script>
-    <script src="scripts/services/busService.js"></script>
     <script src="scripts/services/interactionService.js"></script>
 
     <!-- controllers -->

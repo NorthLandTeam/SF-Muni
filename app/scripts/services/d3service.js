@@ -7,59 +7,61 @@
  * # D3Service
  * Factory in the d3.
  */
-angular.module('d3', [])
+angular.module('d3', ['SFM'])
   .factory('d3Service', ['$document', '$q', '$rootScope',
     function($document, $q, $rootScope) {
       var d = $q.defer();
       function onScriptLoad() {
         // Load client in the browser
+        // need to find a better way to do the extension
         window.d3.selection.prototype.drawBuses = function(busData, projection) {
-			var buses = this.data(busData);
+				var buses = this.data(busData);
 
-			/*
-				TODO: IMPROVE ARROW DIRECTION WITH
-				ANGLE: d.$.heading
-			 */
-			buses.enter()
-				.append('svg:path')
-				.attr('d', 'M0,0l-8.8-17.7C-12.1-24.3-7.4-32,0-32h0c7.4,0,12.1,7.7,8.8,14.3L0,0z')
-				.attr('fill', '#31558d')
-				.attr('fill-opacity', '0.75');
+				//find it impossible to redraw the pin
+				//use simple symbole circle instead
+				buses.enter()
+					.append('circle')
+					.attr('r', 10)
+					.attr('fill', '#31558d')
+					.attr('fill-opacity', '0.75');
 
-			buses.exit()
-				.remove();
+				buses.exit()
+					.remove();
 
 
-			buses.attr('class', 'bus')
-				.attr('data-route-tag', function (d) {
-					return d.$.routeTag; 
-				})
-				.attr('data-dir-tag', function (d) { 
-					return d.$.dirTag; 
-				})
-				.attr('data-heading', function (d) { 
-					return d.$.heading; 
-				})
-				.attr('data-id', function (d) { 
-					return d.$.id; 
-				})
-				.attr("transform", function(d) {
-					return "translate(" 
-						+ projection([d.$.lon,d.$.lat])[0] + "," 
-						+ projection([d.$.lon,d.$.lat])[1] + ") scale(.75)";
-				});
-				/*
-				.append("svg:title")
-				.text(function(d) { 
-					return d.$.id + ' to ' + d.$.dirTag;
-				});
-				*/	
+				buses.attr('class', 'bus')
+					.attr('data-route-tag', function (d) {
+						return d.$.routeTag; 
+					})
+					.attr('data-dir-tag', function (d) { 
+						return d.$.dirTag; 
+					})
+					.attr('data-heading', function (d) { 
+						return d.$.heading; 
+					})
+					.attr('data-id', function (d) { 
+						return d.$.id; 
+					})
+					.attr("cx", function (d) { 
+						return projection([d.$.lon,d.$.lat])[0]; 
+					})
+					.attr("cy", function (d) { 
+						return projection([d.$.lon,d.$.lat])[1]; 
+					});
+					/*
+					.append("svg:title")
+					.text(function(d) { 
+						return d.$.id + ' to ' + d.$.dirTag;
+					});
+					*/	
 
 
-			return buses;
-		};
-		
-        $rootScope.$apply(function() { d.resolve(window.d3); });
+				return buses;
+			};
+
+        $rootScope.$apply(function() { 
+        	d.resolve(window.d3); 
+        });
       }
       // Create a script tag with d3 as the source
       // and call our onScriptLoad callback when it

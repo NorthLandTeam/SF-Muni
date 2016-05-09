@@ -33,25 +33,8 @@ angular.module('SFM')
 				console.log(d3.event.scale);
 				var trans = d3.event.translate;
 				var scale = d3.event.scale;
-				d3.selectAll('.map, .route').attr('transform', 'translate(' + trans[0] + ',' + trans[1] + ')' + ' scale(' + scale + ')');
-				d3.selectAll('.bus').each(function(){
-					var transform = d3.select(this).attr('transform');
-					var x = getTranslate(transform)[0] + trans[0];
-					var y = getTranslate(transform)[1] + trans[1];
-					
-					d3.select(this).attr('transform', 'translate(' + x + ',' + y + ')' + ' scale(' + scale + ')')
-				})
+				d3.selectAll('.map, .route, .bus').attr('transform', 'translate(' + trans[0] + ',' + trans[1] + ')' + ' scale(' + scale + ')');
 			}		
-
-			function getTranslate(transform) {
-				var translate = transform.split(' ')[0];
-				var temp = translate.split(',');
-
-				var x = parseFloat(temp[0].substring(10));
-				var y = parseFloat(temp[1].substring(0,temp[1].length-2));
-
-				return [x, y];
-			}
 
 			return {
 				getSvg: function() {
