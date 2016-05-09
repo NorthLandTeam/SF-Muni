@@ -8,6 +8,7 @@
             data-tag={{route.$.tag}}
             data-toggle="tooltip"
             title={{route.$.title}}
+            data-placement='top'
             ng-repeat="route in routes | orderBy: '-$.title': true">
             <div class='routeContainer'>
                 <i class="fa fa-bus" 

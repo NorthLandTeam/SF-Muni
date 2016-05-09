@@ -8,7 +8,7 @@
  */
 
 angular.module('SFM')
-  	.directive('menu', ['muniService', function(muniService) {
+  	.directive('menu', ['muniService', 'interactionService', function(muniService, interactionService) {
     	return {
 	      restrict: 'EA',
 	      // isolate scope from parents's
@@ -30,14 +30,10 @@ angular.module('SFM')
 
               if(hasClass) {
                 $(this).removeClass('selected');
-                Interaction.deSelectRoute(routeTag);
+                interactionService.deSelectRoute(routeTag);
               } else {
-                // TODO: selected route(s):
-                // add class selected to li (checked)
-                // hide unselected routes on map (checked)
-                // hide buses of unselected routes on map
                 $(this).addClass('selected');
-                Interaction.selectRoute(routeTag);
+                interactionService.selectRoute(routeTag);
               }
           });
 

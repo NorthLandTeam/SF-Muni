@@ -7,7 +7,7 @@
  * # map
  */
 angular.module('SFM')
-	.directive('map', ['$interval', 'd3Service', 'muniService', 'mapService', 'routeService', 'busService', function($interval, d3Service, muniService, mapService, routeService, busService) {
+	.directive('map', ['d3Service','$interval', 'muniService', 'mapService', 'routeService', function(d3Service, $interval, muniService, mapService, routeService) {
     	return {
 			restrict: 'EA',
 			link: function(scope, element, attrs) {
@@ -17,45 +17,8 @@ angular.module('SFM')
 				var width = element[0].style.width,
 					height = element[0].style.height;
 
-				var drawMap = DrawMap.drawMap,
-					redraw = DrawMap.redraw;
-
-				d3Service.d3().then(function(d3) {
-
-				});
-
-				var zoom = d3.behavior.zoom()
-							 .scaleExtent([-1, 2]),
-					projection = mapService.projection,
-					path = mapService.getPathWithProjection(projection),
-					svg = mapService.getSvg()
-								.call(zoom.on("zoom", redraw));
-
-				d3.json('../maps/streets.json', function(error, json) {
-					drawMap(svg, json, 'streets', path);
-
-					d3.json('../maps/arteries.json', function(error, json) {
-						drawMap(svg, json, 'arteries', path);
-
-						d3.json('../maps/freeways.json', function(error, json) {
-							drawMap(svg, json, 'freeways', path);
-
-							d3.json('../maps/neighborhoods.json', function(error, json) {
-								drawMap(svg, json, 'neighborhoods', path);
-
-								muniService.fetchRouteData().then(function(data) {
-									scope.routes = data.route;
-									renderRoutes(svg, scope.routes);
-									fetchBusData(svg, scope.buses, scope.routes, projection);
-								});
-							});
-
-						});
-					});
-				});
-				$interval(function(){ 
-					fetchBusData(svg, scope.buses, scope.routes, projection) 
-				},1500000);
+				var drawMap = mapService.drawMap,
+					redraw = mapService.redraw;
 
 				function fetchBusData(svg, store, routes, projection) {
 					console.log('executed');
@@ -71,7 +34,7 @@ angular.module('SFM')
 									store.push(value);
 								}
 							});
-							svg.selectAll('.bus').drawVehicle(store, projection);
+							svg.selectAll('.bus').drawBuses(store, projection);
 						});
 					});
 				}
@@ -87,6 +50,42 @@ angular.module('SFM')
 						busService.renderBuses(svg, value);
 					});
 				}
+
+				d3Service.d3().then(function(d3){
+					var zoom = d3.behavior.zoom()
+							 .scaleExtent([-1, 2]),
+					projection = mapService.projection,
+					path = mapService.getPathWithProjection(projection),
+					svg = mapService.getSvg()
+								.call(zoom.on("zoom", redraw));
+
+					d3.json('../maps/streets.json', function(error, json) {
+						drawMap(svg, json, 'streets', path);
+
+						d3.json('../maps/arteries.json', function(error, json) {
+							drawMap(svg, json, 'arteries', path);
+
+							d3.json('../maps/freeways.json', function(error, json) {
+								drawMap(svg, json, 'freeways', path);
+
+								d3.json('../maps/neighborhoods.json', function(error, json) {
+									drawMap(svg, json, 'neighborhoods', path);
+
+									muniService.fetchRouteData().then(function(data) {
+										scope.routes = data.route;
+										renderRoutes(svg, scope.routes);
+										fetchBusData(svg, scope.buses, scope.routes, projection);
+									});
+								});
+
+							});
+						});
+					});
+					$interval(function(){ 
+						fetchBusData(svg, scope.buses, scope.routes, projection) 
+					},1500000);
+					}); 
+
 			}
 		};
 }]);

@@ -29,9 +29,9 @@ angular.module('SFM')
 						.style("stroke-opacity", 0.5)
 						.attr("fill", "none")
 						.append("svg:title")
-          				.text(function(d) { 
-          					return routeData.$.title;
-          				});
+						.text(function(d) { 
+							return routeData.$.title;
+						});
 
 					return svg;
 		});
