@@ -22,7 +22,6 @@ angular.module('SFM')
 						redraw = mapService.redraw;
 
 					function fetchBusData(svg, store, routes, projection, refresh) {
-						console.log('exe');
 						store = [];
 						$.each(routes, function(key, value) {
 							var tag = value.$.tag;
@@ -90,11 +89,9 @@ angular.module('SFM')
 							});
 						});
 
-						scope.int = $interval(function(){ 
-											fetchBusData(svg, scope.buses, scope.routes, projection, true) 
-										 },15000);
-
-						console.log(scope.int);
+						$interval(function(){ 
+									fetchBusData(svg, scope.buses, scope.routes, projection, true) 
+								 },15000);
 					}); 
 
 				}

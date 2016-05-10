@@ -26,7 +26,6 @@ angular.module('SFM')
 
 				d3.selectAll('.bus').style("opacity", 0.25);
 				$.each(selectedRoutes, function(key, value) {
-					console.log(value);
 					var buses = '.bus[data-route-tag="' + value + '"]';
 					d3.selectAll(buses).style("opacity", 1);
 				});
@@ -49,7 +48,6 @@ angular.module('SFM')
 					d3.selectAll('.route').style("stroke-opacity", 1).attr("stroke-width", 2);
 					d3.selectAll('.bus').style("opacity", 0.75);
 				} else {
-					console.log(route, buses);
 					d3.selectAll(route).style("stroke-opacity", 0.05).attr("stroke-width", 2);
 					d3.selectAll(buses).style("opacity", 0.25);
 

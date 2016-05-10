@@ -33,8 +33,6 @@ angular.module('SFM')
                 var hasClass = $(this).hasClass('selected');
                 var routeTag = $(this).data('tag');
 
-                console.log(routeTag);
-
                 if(hasClass) {
                   $(this).removeClass('selected');
                   interactionService.deSelectRoute(routeTag);
