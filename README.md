@@ -21,9 +21,14 @@ grunt serve
 ```
 
 ## SF-Muni
-The project includes a map that updates and displays positions of San Francisco's buses and trains in the last 15min.
+The project presents a map that updates and shows positions of San Francisco's buses in the last 15 minutes. The app will update the position info every 15 seconds. Users can hover and choose the routes from the left side navigation, and see the highlighted routes and their associated buses on the map.
+
+This project is done using Angular.js and d3.js. If you want to interact with the app, please click this [link](http://realtimesfmuni.herokuapp.com/#/).
 
 ## TODO
-* Smooth animation of bus location transition
-* Popovers for buses to display more info
+* A Smooth animation of bus location transition
+* More interactions with the map
+  * Popovers for routes on map to display more info, such as stop info, schedules, and important info. 
+  * Popovers for buses on map to display more info, such as each bus direction, speed, predictions and schedules.
+* a more delicate data structure for storing bus locations, which aims at enhancing user experience.
 
