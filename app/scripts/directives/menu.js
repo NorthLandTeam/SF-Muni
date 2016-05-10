@@ -8,8 +8,8 @@
  */
 
 angular.module('SFM')
-  	.directive('menu', ['muniService', 'interactionService', 
-      function(muniService, interactionService) {
+  	.directive('menu', ['$interval', 'muniService', 'interactionService', 
+      function($interval, muniService, interactionService) {
       	return {
   	      restrict: 'EA',
   	      // isolate scope from parents's
@@ -32,6 +32,8 @@ angular.module('SFM')
             $('.sidenav').on('click', 'li', function() {
                 var hasClass = $(this).hasClass('selected');
                 var routeTag = $(this).data('tag');
+
+                console.log(routeTag);
 
                 if(hasClass) {
                   $(this).removeClass('selected');

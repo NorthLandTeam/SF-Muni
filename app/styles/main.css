@@ -83,6 +83,7 @@ body {
     opacity: 0;
     transition: all 0.25s;
     overflow: scroll;
+
 }
 
 /* remove scrollbar */
@@ -96,6 +97,8 @@ body {
     margin-bottom: 5px;
     background-color: #ffffff;
     cursor: pointer;
+
+    transform: translateX(-250px);
 }
 
 .sidenav li.selected {
@@ -132,9 +135,8 @@ body {
     opacity: 1;
 }
 
-#tm:checked ~ .sidenav b {
-    opacity: 1;
-    transform: translateX(0);
+#tm:checked ~ .sidenav li {
+  transform: translateX(0);
 }
 
 #tm:checked ~ section label .bar1 {
@@ -171,6 +173,7 @@ body {
   border-bottom: 1px solid #e5e5e5;
   order: 0;
 }
+
 /* Make the masthead heading the same height as the navigation */
 .header h3 {
   margin-top: 0;
@@ -190,6 +193,11 @@ body {
   padding: 0;
   width: 36px;
   height: 36px;
+}
+
+.btn:focus,.btn:active:focus,.btn.active:focus,
+.btn.focus,.btn:active.focus,.btn.active.focus {
+    outline: none;
 }
 
 .jumbotron {
@@ -495,6 +503,3 @@ body {
     stroke: rgba(40,131,208,0.4);
     stroke-width: 2px;
 }
-
-/* Tooltips */
-/* Routes*/

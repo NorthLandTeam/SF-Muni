@@ -17,7 +17,7 @@ angular.module('d3', ['SFM'])
         window.d3.selection.prototype.drawBuses = function(busData, projection) {
 				var buses = this.data(busData);
 
-				//find it impossible to redraw the pin
+				//find it impossible to redraw and locate the pin
 				//use simple symbole circle instead
 				buses.enter()
 					.append('circle')

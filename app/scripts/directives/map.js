@@ -7,8 +7,8 @@
  * # map
  */
 angular.module('SFM')
-	.directive('map', ['d3Service','$interval', 'muniService', 'mapService', 'routeService', 
-		function(d3Service, $interval, muniService, mapService, routeService) {
+	.directive('map', ['d3Service','$interval', 'muniService', 'mapService', 'routeService', 'interactionService',
+		function(d3Service, $interval, muniService, mapService, routeService, interactionService) {
 	    	return {
 				restrict: 'EA',
 				link: function(scope, element, attrs) {
@@ -21,8 +21,8 @@ angular.module('SFM')
 					var drawMap = mapService.drawMap,
 						redraw = mapService.redraw;
 
-					function fetchBusData(svg, store, routes, projection) {
-						console.log('executed');
+					function fetchBusData(svg, store, routes, projection, refresh) {
+						console.log('exe');
 						store = [];
 						$.each(routes, function(key, value) {
 							var tag = value.$.tag;
@@ -36,6 +36,8 @@ angular.module('SFM')
 									}
 								});
 								svg.selectAll('.bus').drawBuses(store, projection);
+								var routeTags = interactionService.selectedRoutes;
+								interactionService.selectRoutes(routeTags);
 							});
 						});
 					}
@@ -60,32 +62,40 @@ angular.module('SFM')
 						svg = mapService.getSvg();
 									//.call(zoom.on("zoom", redraw));
 
-						d3.json('../maps/streets.json', function(error, json) {
+						d3.json('/maps/streets.json', function(error, json) {
 							drawMap(svg, json, 'streets', path);
 
-							d3.json('../maps/arteries.json', function(error, json) {
+							d3.json('/maps/arteries.json', function(error, json) {
 								drawMap(svg, json, 'arteries', path);
 
-								d3.json('../maps/freeways.json', function(error, json) {
+								d3.json('/maps/freeways.json', function(error, json) {
 									drawMap(svg, json, 'freeways', path);
 
-									d3.json('../maps/neighborhoods.json', function(error, json) {
+									d3.json('/maps/neighborhoods.json', function(error, json) {
 										drawMap(svg, json, 'neighborhoods', path);
 
-										muniService.fetchRouteData().then(function(data) {
-											scope.routes = data.route;
+										if(!scope.routes) {
+											muniService.fetchRouteData().then(function(data) {
+												scope.routes = data.route;
+												renderRoutes(svg, scope.routes);
+												fetchBusData(svg, scope.buses, scope.routes, projection, true);
+											});
+										} else {
 											renderRoutes(svg, scope.routes);
-											fetchBusData(svg, scope.buses, scope.routes, projection);
-										});
+											fetchBusData(svg, scope.buses, scope.routes, projection, true);
+										}
 									});
 
 								});
 							});
 						});
-						$interval(function(){ 
-							fetchBusData(svg, scope.buses, scope.routes, projection) 
-						},15000);
-						}); 
+
+						scope.int = $interval(function(){ 
+											fetchBusData(svg, scope.buses, scope.routes, projection, true) 
+										 },15000);
+
+						console.log(scope.int);
+					}); 
 
 				}
 			};

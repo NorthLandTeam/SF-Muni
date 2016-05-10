@@ -8,7 +8,7 @@
  * Factory in the SFM.
  */
 angular.module('SFM')
-		.factory('mapService', function(){
+		.factory('mapService', ['interactionService', function(interactionService){
 			var projection = d3.geo.mercator()
 								.scale(200000)
 								.center([-122.45, 37.75]);
@@ -29,9 +29,13 @@ angular.module('SFM')
 			}
 
 			function redraw() {
+				var selectedStore = interactionService.selectedRoutes;
 				var trans = d3.event.translate;
 				var scale = d3.event.scale;
 				d3.selectAll('.map, .route, .bus').attr('transform', 'translate(' + trans[0] + ',' + trans[1] + ')' + ' scale(' + scale + ')');
+				$.each(selectedStore, function(key, value) {
+					interactionService.selectRoute(value);
+				})
 			}		
 
 			return {
@@ -49,4 +53,4 @@ angular.module('SFM')
 
 				redraw: redraw	
 		}
-});
+}]);
